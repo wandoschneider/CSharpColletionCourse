@@ -13,7 +13,7 @@ namespace SetsOnModel
             csharpColecoes.Adicionar(new Aula("Modelando Coleções", 24));
 
             var a1 = new Aluno("Vanessa Tonini", 1234);
-            var a2 = new Aluno("Ana Losnak", 4321);
+            var a2 = new Aluno("Ana Losnak", 5617);
             var a3 = new Aluno("Rafale Nercessian", 4132);
 
             csharpColecoes.Matricular(a1);
@@ -31,6 +31,15 @@ namespace SetsOnModel
 
             var tonini = new Aluno("Vanessa Tonini", 1234);
             System.Console.WriteLine(a1.Equals(tonini));
+
+            Console.Clear();
+            var aluno5617 = csharpColecoes.BuscaMatriculado(5617);
+            System.Console.WriteLine($"aluno5617: {aluno5617}");
+
+            var fabio = new Aluno("Fabio Duplicado", 5617);
+            csharpColecoes.SubstituirAluno(fabio);
+            System.Console.WriteLine($"Quem possui a matrícula 5617? {csharpColecoes.BuscaMatriculado(5617)}");
+
         }
     }
 }

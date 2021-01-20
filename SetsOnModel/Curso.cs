@@ -7,6 +7,7 @@ namespace SetsOnModel
 {
     public class Curso
     {
+        private Dictionary<int, Aluno> dicionarioAlunos = new Dictionary<int, Aluno>();
         private ISet<Aluno> alunos = new HashSet<Aluno>();
         public IList<Aluno> Alunos
         {
@@ -38,7 +39,8 @@ namespace SetsOnModel
 
         internal void Matricular(Aluno aluno)
         {
-            alunos.Add(aluno);
+            this.alunos.Add(aluno);
+            this.dicionarioAlunos.Add(aluno.NumeroMatricula, aluno);
         }
 
         public string Nome
@@ -46,11 +48,34 @@ namespace SetsOnModel
             get { return nome; }
             set { nome = value; }
         }
-        
+
         public string Instrutor
         {
             get { return instrutor; }
             set { instrutor = value; }
+        }
+
+        internal void SubstituirAluno(Aluno aluno)
+        {
+            this.dicionarioAlunos[aluno.NumeroMatricula] = aluno;
+        }
+
+        internal Aluno BuscaMatriculado(int numeroMatricula)
+        {
+
+            Aluno aluno = null;
+            this.dicionarioAlunos.TryGetValue(numeroMatricula, out aluno);
+            return aluno;
+
+            //Busca feita na unha
+            // foreach (var aluno in alunos)
+            // {
+            //     if (aluno.NumeroMatricula == numeroMatricula)
+            //         return aluno;
+
+            // }
+
+            // throw new Exception($"Matrícula não encontrada ({numeroMatricula})");
         }
 
         public int TempoTotal
